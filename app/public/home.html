@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Friend Finder</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-default" id="navBarColor">
+      <a class="navbar-brand" id="navBar" href=" # " class="navTextColor">FriendFinder</a>
+    </nav>
+  <div class="jumbotron">
+        <div class="text-center">
+        <a href="/survey"><button id="lookForMatchBtn" type="button" class="btn btn-lg"><span id="glyphicon" class="glyphicon glyphicon-search"></span>Look for yor match</button></a>
+    </div>
+    <p id="friendFinderText">FriendFinder will generate the best match for you based on our survay questions.
+       Take a ten question survey and find the best match for you,
+        all we need is your photo and name.  </p>
+    </div>
+  </div>
+  <footer>
+      <div id="footerDate">
+        © <span id="date"></span>
+      </div>
+  </footer>
+  </div>
+
+
+</body>
+
+</html>
+
+<script>
+var year= new Date().getFullYear();
+$("#date").append(year)
+</script>

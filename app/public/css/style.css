@@ -1,0 +1,61 @@
+body{
+  background-color: #BFADA3;
+}
+#navBarColor{
+  background-color: #504746;
+
+}
+#navBarColorS{
+  background-color: #504746;
+
+}
+#navBar{
+  color:#FBB7C0;
+  }
+.navTextColor{
+
+  color:#FBB7C0;
+}
+.jumbotron{
+    background-color: #504746;
+}
+#questions{
+    color: #BFADA3;
+
+}
+#submit{
+
+  color: #504746;
+}
+select{
+color:  #504746;
+
+}
+#lookForMatchBtn{
+  color: #504746;
+
+}
+#introText{
+  color: #B6244F;
+}
+footer{
+    background-color: #504746;
+    position:absolute;
+       bottom:0px;
+       width: 100%;
+       margin: 0;
+       height: 70px;
+}
+#footerDate{
+  display:flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+
+}
+#glyphicon{
+  padding-right: 20px;
+}
+#friendFinderText{
+      color: #BFADA3;
+      padding-top: 30px;
+}

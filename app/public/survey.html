@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Friend Finder</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="/css/style.css" rel="stylesheet">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-default" id="navBarColorS">
+        <a class="navbar-brand" id="navBar" href=" # ">FriendFinder</a>
+      </nav>
+    </div>
+    <div class="container">
+      <h3 id="introText">Tell us little about your self:</h3>
+      <form>
+        <label>
+                    <input type="text" name="name" id="name" placeholder="Name"></input>
+                </label>
+        <label>
+                    <input type="text" name="image" id="image" placeholder="Photo"></input>
+            </form>
+        </div>
+        <div class="container">
+            <div class="jumbotron" id="jumbo">
+                <form role="form" id="questions">
+                </form>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div id="matchModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">FriendFinder</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>We found you a match!</p>
+                        <h3 id="matchName"></h3>
+                        <img src="" id="matchPhoto" style="width: 80px; height: 80px;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+          <div id="footerDate">
+            © <span id="date"></span>
+          </div>
+        </footer>
+        <style>
+        label {
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        </style>
+        <script>
+        var year= new Date().getFullYear();
+        $("#date").append(year);
+
+        var questions = ["Do you like outdoor activities?", "Do you often travel for fun?", "Are you a risk taker?", "Do you maintain long term friendships?", "If you could trun back the time, would you do it?", "Do you like house music?", "Do you like talking about your self?", "Do you think you look better as you age?", "Are you going to buy iPhone x?", "Do you get bored of things easly?"]
+
+        // This for loop creates labels and selections which are added to the
+        // question form
+        for (var i = 0; i < questions.length; i++) {
+
+            var label = $("<label>").text(questions[i])
+            var select = $("<select>").attr("id", "question" + i)
+            select.attr("name", "questions" + i)
+
+            for (var j = 1; j < 6; j++) {
+                var option = $("<option>").attr("value", j);
+                option.text(j);
+                select.append(option);
+            }
+
+            $("#questions").append(label);
+            $("#questions").append(select);
+            $("#questions").append("<br>");
+
+        }
+        var submit = $("<button>").attr("type", "submit");
+        submit.attr("id", "submit");
+        submit.addClass("btn btn-md");
+        submit.text("SUBMIT");
+        $("#questions").append(submit);
+        $("#submit").on("click", function(e) {
+            e.preventDefault();
+
+            var newData = {
+                name: $("#name").val().trim(),
+                photo: $("#image").val().trim(),
+                scores: [],
+            }
+            for (var i = 0; i < questions.length; i++) {
+                var quest = parseInt($("#question" + i).val())
+                newData.scores.push(quest)
+            }
+            $.post({
+                url: "/api/friends",
+                data: newData,
+                success: function(data, text, req) {
+                    var photo = data.photo.length === 0 ? "https://www.exaclair.com/images/placeholders/team-placeholder.jpg" : data.photo
+                    console.log("Request Finished");
+                    $("#matchName").text(data.name);
+                    $("#matchPhoto").attr("src", photo);
+                    $("#matchModal").modal("show");
+                },
+                traditional: true,
+            })
+            $("#name").val("")
+            $("#image").val("")
+
+            for (var k = 0 ; k < questions.length; k++){
+             $("select")[k].selectedIndex = 0;
+            }
+        })
+
+        </script>
+    </body>
+
+</html>
